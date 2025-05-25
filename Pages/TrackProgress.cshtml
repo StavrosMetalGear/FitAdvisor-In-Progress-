@@ -1,0 +1,50 @@
+﻿@page
+@model FitAdvisor.Pages.TrackProgressModel
+@{
+    ViewData["Title"] = "Progress Tracker";
+}
+
+<h2>Track Your Progress</h2>
+
+<form method="post" class="mb-4">
+    <div class="form-group">
+        <label asp-for="Input.Weight"></label>
+        <input asp-for="Input.Weight" class="form-control" />
+        <span asp-validation-for="Input.Weight" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Log Weight</button>
+</form>
+
+<hr />
+
+<h4>Progress Summary</h4>
+<p><strong>Starting Weight:</strong> @Model.StartingWeight kg</p>
+<p><strong>Target Weight:</strong> @Model.TargetWeight kg</p>
+<p><strong>Latest Logged Weight:</strong> @Model.LatestWeight kg</p>
+
+@if (Model.History.Any())
+{
+    <h5 class="mt-4">Weight History</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Weight (kg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model.History)
+            {
+                <tr>
+                    <td>@entry.Date.ToShortDateString()</td>
+                    <td>@entry.Weight</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No weight logs yet. Add your first one above!</p>
+}
+

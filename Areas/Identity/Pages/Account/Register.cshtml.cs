@@ -63,6 +63,9 @@ namespace FitAdvisor.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Gender")]
             public string Gender { get; set; }
+            [Required]
+            [Display(Name = "Height (cm)")]
+            public double Height { get; set; }
 
             [Required]
             [Display(Name = "Weight (kg)")]
@@ -127,8 +130,17 @@ namespace FitAdvisor.Areas.Identity.Pages.Account
                 //  Create the user
                 var user = CreateUser();
 
-                //  Save the user
+                user.UserName = Input.Email;
+                user.Email = Input.Email;
+                user.Name = Input.Name;
+                user.Gender = Input.Gender;
+                user.Height = Input.Height;
+                user.Weight = Input.Weight;
+                user.TargetWeight = Input.TargetWeight;
+
+                // Save the user
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
 
                 if (result.Succeeded)
                 {
@@ -153,7 +165,8 @@ namespace FitAdvisor.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return RedirectToPage("/Profile");
+
                     }
                 }
 

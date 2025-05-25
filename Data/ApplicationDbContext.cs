@@ -10,5 +10,8 @@ namespace FitAdvisor.Data
             : base(options)
         {
         }
+        public DbSet<MealEntry> MealEntries { get; set; }
+        public DbSet<WeightEntry> WeightEntries { get; set; }
+
     }
 }

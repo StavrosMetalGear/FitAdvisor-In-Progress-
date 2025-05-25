@@ -1,0 +1,23 @@
+﻿@page
+@model FitAdvisor.Pages.CaloriePlanModel
+
+<h2>Your Calorie Plans</h2>
+
+@if (Model != null)
+{
+    <p><strong>Current Weight:</strong> @Model.Weight kg</p>
+    <p><strong>Target Weight:</strong> @Model.TargetWeight kg</p>
+    <p><strong>Height:</strong> @Model.Height cm</p>
+
+    <h3>Recommended Plans:</h3>
+    <ul>
+        <li><strong>Easy:</strong> @Model.EasyCalories kcal/day</li>
+        <li><strong>Medium:</strong> @Model.MediumCalories kcal/day</li>
+        <li><strong>Hard:</strong> @Model.HardCalories kcal/day</li>
+    </ul>
+    <h3>Body Fat Estimates</h3>
+    <p><strong>Current Body Fat:</strong> @Model.CurrentBodyFat%</p>
+    <p><strong>Target Body Fat:</strong> @Model.TargetBodyFat%</p>
+
+}
+
